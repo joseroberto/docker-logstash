@@ -1,0 +1,17 @@
+HEX [0-9A-F]{8}
+HEX2 [0-9A-F]{16}
+YEAR (?>\d\d){1,2}
+MONTHNUM2 (?:0[1-9]|1[0-2])
+MONTHDAY (?:(?:0[1-9])|(?:[12][0-9])|(?:3[01])|[1-9])
+HOUR (?:2[0123]|[01]?[0-9])
+MINUTE (?:[0-5][0-9])
+SECOND (?:(?:[0-5]?[0-9]|60)(?:[:.,][0-9]+)?)
+TIME (?!<[0-9])%{HOUR}:%{MINUTE}(?::%{SECOND})(?![0-9])
+DATE_EVENT %{YEAR}/%{MONTHNUM2}/%{MONTHDAY} %{TIME}
+HSMFORMAT %{DATE_EVENT:data} %{HEX:tid} %{HEX:crt} %{HEX:cid} %{GREEDYDATA:mensagem}
+DATAIDENT %{DATE_EVENT:data} %{HEX:tid} %{HEX:crt} %{HEX:cid}
+WORD2 %{WORD} %{WORD}
+NAMESPACE [a-zA-Z0-9_]+
+WORDEXT \b[\w-]+\b
+SEPARADOR \S
+WORDFQN [a-zA-Z0-9_\/]+
